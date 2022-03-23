@@ -1,0 +1,18 @@
+.elements__like-button {
+  width: 22px;
+  height: 19px;
+  background-color: transparent;
+  background-image: url(../../../images/Heart.svg);
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  transition: opacity .5s ease-out;
+}
+
+.elements__like-button:hover {
+  opacity: .5;
+}
+
+.elements__like-button:active {
+  background-image: url(../../../images/Heart-Active.svg);
+}

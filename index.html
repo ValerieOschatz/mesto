@@ -5,9 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
-  <link rel="stylesheet" href="./vendor/normalize.css">
-  <link rel="stylesheet" href="./vendor/fonts/inter.css">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class = "page">
   <header class="header">
@@ -24,7 +22,7 @@
         </div>
         <p class="profile__profession">Исследователь океана</p>
       </div>
-      <button class="add-button" type="button"></button>
+      <button class="profile__add-button" type="button"></button>
     </section>
 
     <section class="elements">
@@ -73,22 +71,22 @@
         </li>
       </ul>
     </section>
-
-    <section class="popup">
-      <div class="popup__container">
-        <form class="popup__form">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__input popup__input_for_name" type="text" id="name" name="name" placeholder="Имя" required>
-          <input class="popup__input popup__input_for_profession" type="text" id="profession" name="profession" placeholder="Профессия" required>
-          <button class="popup__submit-button" type="submit">Сохранить</button>
-        </form>
-        <button class="popup__close-button" type="button"></button>
-      </div>
-    </section>
   </main>
 
   <footer class="footer">
     <p class="footer__content">&copy; 2022 Mesto Russia</p>
   </footer>
+
+  <section class="popup">
+    <div class="popup__container">
+      <form class="popup__form">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input class="popup__input popup__input_type_name" type="text" id="name" name="name" placeholder="Имя" required>
+        <input class="popup__input popup__input_type_profession" type="text" id="profession" name="profession" placeholder="Профессия" required>
+        <button class="popup__submit-button" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close-button" type="button"></button>
+    </div>
+  </section>
 </body>
 </html>
