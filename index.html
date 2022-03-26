@@ -18,55 +18,55 @@
       <div class="profile__info">
         <div class="profile__name-container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button" type="button"></button>
+          <button class="profile__edit-button" type="button" aria-label="open-edit-form"></button>
         </div>
         <p class="profile__profession">Исследователь океана</p>
       </div>
-      <button class="profile__add-button" type="button"></button>
+      <button class="profile__add-button" type="button" aria-label="open-pictures-form"></button>
     </section>
 
     <section class="elements">
       <ul class="elements__list">
-        <li class="elements__card">
-          <img class="elements__image" src="./images/Karachaevsk.jpg" alt="Старый замок в горах">
-          <div class="elements__image-title-container">
-            <h2 class="elements__title">Карачаевск</h2>
-            <button class="elements__like-button" type="button"></button>
+        <li class="element">
+          <img class="element__image" src="./images/Karachaevsk.jpg" alt="Старый замок в горах">
+          <div class="element__image-title-container">
+            <h2 class="element__title">Карачаевск</h2>
+            <button class="element__like-button" type="button" aria-label="like"></button>
           </div>
         </li>
-        <li class="elements__card">
-          <img class="elements__image" src="./images/Elbrus.jpg" alt="Эльбрус на рассвете">
-          <div class="elements__image-title-container">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button class="elements__like-button" type="button"></button>
+        <li class="element">
+          <img class="element__image" src="./images/Elbrus.jpg" alt="Эльбрус на рассвете">
+          <div class="element__image-title-container">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <button class="element__like-button" type="button" aria-label="like"></button>
           </div>
         </li>
-        <li class="elements__card">
-          <img class="elements__image" src="./images/Dombai.jpg" alt="Горы Домбая в пасмурный день">
-          <div class="elements__image-title-container">
-            <h2 class="elements__title">Домбай</h2>
-            <button class="elements__like-button" type="button"></button>
+        <li class="element">
+          <img class="element__image" src="./images/Dombai.jpg" alt="Горы Домбая в пасмурный день">
+          <div class="element__image-title-container">
+            <h2 class="element__title">Домбай</h2>
+            <button class="element__like-button" type="button" aria-label="like"></button>
           </div>
         </li>
-        <li class="elements__card">
-          <img class="elements__image" src="./images/flowers.jpg" alt="Цветы и стакан с кофе">
-          <div class="elements__image-title-container">
-            <h2 class="elements__title">Цветы и стакан с кофе</h2>
-            <button class="elements__like-button" type="button"></button>
+        <li class="element">
+          <img class="element__image" src="./images/flowers.jpg" alt="Цветы и стакан с кофе">
+          <div class="element__image-title-container">
+            <h2 class="element__title">Цветы и стакан с кофе</h2>
+            <button class="element__like-button" type="button" aria-label="like"></button>
           </div>
         </li>
-        <li class="elements__card">
-          <img class="elements__image" src="./images/leaves.jpg" alt="Листья">
-          <div class="elements__image-title-container">
-            <h2 class="elements__title">Листья</h2>
-            <button class="elements__like-button" type="button"></button>
+        <li class="element">
+          <img class="element__image" src="./images/leaves.jpg" alt="Листья">
+          <div class="element__image-title-container">
+            <h2 class="element__title">Листья</h2>
+            <button class="element__like-button" type="button" aria-label="like"></button>
           </div>
         </li>
-        <li class="elements__card">
-          <img class="elements__image" src="./images/Tulip.jpg" alt="Светло-розовый тюльпан">
-          <div class="elements__image-title-container">
-            <h2 class="elements__title">Светло-розовый тюльпан</h2>
-            <button class="elements__like-button" type="button"></button>
+        <li class="element">
+          <img class="element__image" src="./images/Tulip.jpg" alt="Светло-розовый тюльпан">
+          <div class="element__image-title-container">
+            <h2 class="element__title">Светло-розовый тюльпан</h2>
+            <button class="element__like-button" type="button" aria-label="like"></button>
           </div>
         </li>
       </ul>
@@ -77,17 +77,17 @@
     <p class="footer__content">&copy; 2022 Mesto Russia</p>
   </footer>
 
-  <section class="popup">
+  <div class="popup">
     <div class="popup__container">
-      <form class="popup__form">
+      <form class="popup__form" name="edit-form">
         <h2 class="popup__title">Редактировать профиль</h2>
         <input class="popup__input popup__input_type_name" type="text" id="name" name="name" placeholder="Имя" required>
         <input class="popup__input popup__input_type_profession" type="text" id="profession" name="profession" placeholder="О себе" required>
         <button class="popup__submit-button" type="submit">Сохранить</button>
       </form>
-      <button class="popup__close-button" type="button"></button>
+      <button class="popup__close-button" type="button" aria-label="close-edit-form"></button>
     </div>
-  </section>
+  </div>
   <script src=".//scripts/index.js"></script>
 </body>
 </html>
