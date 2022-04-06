@@ -18,55 +18,61 @@
       <div class="profile__info">
         <div class="profile__name-container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button" type="button" aria-label="open-edit-form"></button>
+          <button class="profile__edit-button" type="button" aria-label="Открыть окно настроек"></button>
         </div>
         <p class="profile__profession">Исследователь океана</p>
       </div>
-      <button class="profile__add-button" type="button" aria-label="open-pictures-form"></button>
+      <button class="profile__add-button" type="button" aria-label="Открыть настройки фото"></button>
     </section>
 
     <section class="elements">
       <ul class="elements__list">
         <li class="element">
           <img class="element__image" src="./images/Karachaevsk.jpg" alt="Старый замок в горах">
+          <button class="element__delete" type="button" aria-label="Удалить"></button>
           <div class="element__image-title-container">
             <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-button" type="button" aria-label="like"></button>
+            <button class="element__like-button" type="button" aria-label="Нравится"></button>
           </div>
         </li>
         <li class="element">
           <img class="element__image" src="./images/Elbrus.jpg" alt="Эльбрус на рассвете">
+          <button class="element__delete" type="button" aria-label="Удалить"></button>
           <div class="element__image-title-container">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like-button" type="button" aria-label="like"></button>
+            <button class="element__like-button" type="button" aria-label="Нравится"></button>
           </div>
         </li>
         <li class="element">
           <img class="element__image" src="./images/Dombai.jpg" alt="Горы Домбая в пасмурный день">
+          <button class="element__delete" type="button" aria-label="Удалить"></button>
           <div class="element__image-title-container">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__like-button" type="button" aria-label="like"></button>
+            <button class="element__like-button" type="button" aria-label="Нравится"></button>
           </div>
         </li>
         <li class="element">
           <img class="element__image" src="./images/flowers.jpg" alt="Цветы и стакан с кофе">
+          <button class="element__delete" type="button" aria-label="Удалить"></button>
           <div class="element__image-title-container">
             <h2 class="element__title">Цветы и стакан с кофе</h2>
-            <button class="element__like-button" type="button" aria-label="like"></button>
+            <button class="element__like-button" type="button" aria-label="Нравится"></button>
           </div>
         </li>
         <li class="element">
           <img class="element__image" src="./images/leaves.jpg" alt="Листья">
+          <button class="element__delete" type="button" aria-label="Удалить"></button>
           <div class="element__image-title-container">
             <h2 class="element__title">Листья</h2>
-            <button class="element__like-button" type="button" aria-label="like"></button>
+            <button class="element__like-button" type="button" aria-label="Нравится"></button>
           </div>
         </li>
         <li class="element">
           <img class="element__image" src="./images/Tulip.jpg" alt="Светло-розовый тюльпан">
+          <button class="element__delete" type="button" aria-label="Удалить"></button>
           <div class="element__image-title-container">
             <h2 class="element__title">Светло-розовый тюльпан</h2>
-            <button class="element__like-button" type="button" aria-label="like"></button>
+            <button class="element__like-button" type="button" aria-label="Нравится"></button>
           </div>
         </li>
       </ul>
@@ -77,15 +83,37 @@
     <p class="footer__content">&copy; 2022 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
+  <div class="popup popup_type_edit">
     <div class="popup__container">
-      <form class="popup__form" name="edit-form">
+      <form class="popup__form popup__form_edit" name="edit-form">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__input popup__input_type_name" type="text" id="name" name="name" placeholder="Имя" required>
-        <input class="popup__input popup__input_type_profession" type="text" id="profession" name="profession" placeholder="О себе" required>
+        <input class="popup__input" type="text" id="name" name="name" placeholder="Имя" required>
+        <input class="popup__input" type="text" id="profession" name="profession" placeholder="О себе" required>
         <button class="popup__submit-button" type="submit">Сохранить</button>
       </form>
-      <button class="popup__close-button" type="button" aria-label="close-edit-form"></button>
+      <button class="popup__close-button" type="button" aria-label="Закрыть окно настроек"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_type_add">
+    <div class="popup__container">
+      <form class="popup__form popup__form_add" name="add-form">
+        <h2 class="popup__title">Новое место</h2>
+        <input class="popup__input" type="text" id="place" name="place" placeholder="Название" required>
+        <input class="popup__input" type="text" id="link" name="link" placeholder="Ссылка на картинку" required>
+        <button class="popup__submit-button" type="submit">Создать</button>
+      </form>
+      <button class="popup__close-button" type="button" aria-label="Закрыть окно настроек"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_type_full-image">
+    <div class="popup__container popup__container_image">
+      <figure class="popup__figure">
+        <img class="popup__image" src="" alt="">
+        <figcaption class="popup__image-title"></figcaption>
+      </figure>
+      <button class="popup__close-button" type="button" aria-label="Закрыть окно настроек"></button>
     </div>
   </div>
   <script src=".//scripts/index.js"></script>
