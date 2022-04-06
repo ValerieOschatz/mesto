@@ -40,13 +40,10 @@ const popups = document.querySelectorAll('.popup'),
       profileProfession = document.querySelector('.profile__profession'),
       addForm = popupAdd.querySelector('.popup__form_add'),
       elementsList = document.querySelector('.elements__list'),
-      elementTemplate = document.querySelector('.element-template').content;
-      // popupFullImage = document.querySelector('.popup_type_full-image'),
-      // likeButtons = document.querySelectorAll('.element__like-button'),
-      // images = document.querySelectorAll('.element__image'),
-      // fullImage = popupFullImage.querySelector('.popup__image'),
-      // fullImageTitle = popupFullImage.querySelector('.popup__image-title'),
-      // deleteButtons = document.querySelectorAll('.element__delete-button');
+      elementTemplate = document.querySelector('.element-template').content,
+      popupFullImage = document.querySelector('.popup_type_full-image'),
+      fullImage = popupFullImage.querySelector('.popup__image'),
+      fullImageTitle = popupFullImage.querySelector('.popup__image-title');
 
 initialCards.forEach(card => {
   const cardElement = elementTemplate.cloneNode(true),
@@ -58,6 +55,13 @@ initialCards.forEach(card => {
   elementImage.src = card.link;
   elementImage.alt = card.name;
   elementTitle.textContent = card.name;
+
+  elementImage.addEventListener('click', function() {
+    openPopup(popupFullImage);
+    fullImage.src = card.link;
+    fullImage.alt = card.name;
+    fullImageTitle.textContent = card.name;
+  });
 
   deleteButton.addEventListener('click', function(evt) {
     evt.target.closest('.element').remove();
@@ -109,31 +113,3 @@ function submitAddForm(evt) {
 editForm.addEventListener('submit', submitEditForm);
 addForm.addEventListener('submit', submitAddForm);
 
-
-
-// likeButtons.forEach(likeButton => {
-//   likeButton.addEventListener('click', function() {
-//     likeButton.classList.toggle('element__like-button_active');
-//   })
-// })
-
-// images.forEach(image => {
-//   image.addEventListener('click', function() {
-//     popupFullImage.classList.add('popup_opened');
-
-//     const link = image.getAttribute('src'),
-//           alt = image.getAttribute('alt'),
-//           card = image.parentElement,
-//           imageTitle = card.querySelector('.element__title');
-
-//     fullImage.src = link;
-//     fullImage.alt = alt;
-//     fullImageTitle.textContent = imageTitle.textContent;
-//   })
-// })
-
-// deleteButtons.forEach(deleteButton => {
-//   deleteButton.addEventListener('click', function() {
-//     deleteButton.closest('.element').remove();
-//   })
-// })
