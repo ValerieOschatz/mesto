@@ -27,54 +27,7 @@
 
     <section class="elements">
       <ul class="elements__list">
-        <li class="element">
-          <img class="element__image" src="./images/Karachaevsk.jpg" alt="Старый замок в горах">
-          <button class="element__delete" type="button" aria-label="Удалить"></button>
-          <div class="element__image-title-container">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-button" type="button" aria-label="Нравится"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/Elbrus.jpg" alt="Эльбрус на рассвете">
-          <button class="element__delete" type="button" aria-label="Удалить"></button>
-          <div class="element__image-title-container">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like-button" type="button" aria-label="Нравится"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/Dombai.jpg" alt="Горы Домбая в пасмурный день">
-          <button class="element__delete" type="button" aria-label="Удалить"></button>
-          <div class="element__image-title-container">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__like-button" type="button" aria-label="Нравится"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/flowers.jpg" alt="Цветы и стакан с кофе">
-          <button class="element__delete" type="button" aria-label="Удалить"></button>
-          <div class="element__image-title-container">
-            <h2 class="element__title">Цветы и стакан с кофе</h2>
-            <button class="element__like-button" type="button" aria-label="Нравится"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/leaves.jpg" alt="Листья">
-          <button class="element__delete" type="button" aria-label="Удалить"></button>
-          <div class="element__image-title-container">
-            <h2 class="element__title">Листья</h2>
-            <button class="element__like-button" type="button" aria-label="Нравится"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/Tulip.jpg" alt="Светло-розовый тюльпан">
-          <button class="element__delete" type="button" aria-label="Удалить"></button>
-          <div class="element__image-title-container">
-            <h2 class="element__title">Светло-розовый тюльпан</h2>
-            <button class="element__like-button" type="button" aria-label="Нравится"></button>
-          </div>
-        </li>
+
       </ul>
     </section>
   </main>
@@ -116,6 +69,17 @@
       <button class="popup__close-button" type="button" aria-label="Закрыть окно настроек"></button>
     </div>
   </div>
+
+  <template class="element-template">
+    <li class="element">
+      <img class="element__image" src="" alt="">
+      <button class="element__delete-button" type="button" aria-label="Удалить"></button>
+      <div class="element__image-title-container">
+        <h2 class="element__title"></h2>
+        <button class="element__like-button" type="button" aria-label="Нравится"></button>
+      </div>
+    </li>
+  </template>
   <script src=".//scripts/index.js"></script>
 </body>
 </html>

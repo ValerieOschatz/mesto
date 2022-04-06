@@ -1,5 +1,32 @@
 'use strict';
 
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
 const popups = document.querySelectorAll('.popup'),
       popupEdit = document.querySelector('.popup_type_edit'),
       popupAdd = document.querySelector('.popup_type_add'),
@@ -11,13 +38,37 @@ const popups = document.querySelectorAll('.popup'),
       professionInput = editForm.querySelector('#profession'),
       profileName = document.querySelector('.profile__name'),
       profileProfession = document.querySelector('.profile__profession'),
-      addForm = popupAdd.querySelector('.popup__form_add');
+      addForm = popupAdd.querySelector('.popup__form_add'),
+      elementsList = document.querySelector('.elements__list'),
+      elementTemplate = document.querySelector('.element-template').content;
       // popupFullImage = document.querySelector('.popup_type_full-image'),
       // likeButtons = document.querySelectorAll('.element__like-button'),
       // images = document.querySelectorAll('.element__image'),
       // fullImage = popupFullImage.querySelector('.popup__image'),
       // fullImageTitle = popupFullImage.querySelector('.popup__image-title'),
-      // deleteButtons = document.querySelectorAll('.element__delete');
+      // deleteButtons = document.querySelectorAll('.element__delete-button');
+
+initialCards.forEach(card => {
+  const cardElement = elementTemplate.cloneNode(true),
+        elementImage = cardElement.querySelector('.element__image'),
+        elementTitle = cardElement.querySelector('.element__title'),
+        deleteButton = cardElement.querySelector('.element__delete-button'),
+        likeButton = cardElement.querySelector('.element__like-button');
+
+  elementImage.src = card.link;
+  elementImage.alt = card.name;
+  elementTitle.textContent = card.name;
+
+  deleteButton.addEventListener('click', function(evt) {
+    evt.target.closest('.element').remove();
+  });
+
+  likeButton.addEventListener('click', function(evt) {
+    evt.target.classList.toggle('element__like-button_active');
+  });
+
+  elementsList.append(cardElement);
+});
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
@@ -39,7 +90,7 @@ addButton.addEventListener('click', function() {
 
 popupCloseButtons.forEach(closeButton => {
   closeButton.addEventListener('click', closePopup);
-})
+});
 
 
 
