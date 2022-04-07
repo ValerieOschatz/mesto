@@ -39,48 +39,78 @@ const popups = document.querySelectorAll('.popup'),
       profileName = document.querySelector('.profile__name'),
       profileProfession = document.querySelector('.profile__profession'),
       addForm = popupAdd.querySelector('.popup__form_add'),
+      placeInput = addForm.querySelector('#place'),
+      linkInput = addForm.querySelector('#link'),
       elementsList = document.querySelector('.elements__list'),
       elementTemplate = document.querySelector('.element-template').content,
       popupFullImage = document.querySelector('.popup_type_full-image'),
       fullImage = popupFullImage.querySelector('.popup__image'),
       fullImageTitle = popupFullImage.querySelector('.popup__image-title');
 
-initialCards.forEach(card => {
-  const cardElement = elementTemplate.cloneNode(true),
-        elementImage = cardElement.querySelector('.element__image'),
-        elementTitle = cardElement.querySelector('.element__title'),
-        deleteButton = cardElement.querySelector('.element__delete-button'),
-        likeButton = cardElement.querySelector('.element__like-button');
+function createCards(array) {
+  array.forEach(item => {
+    const cardElement = elementTemplate.cloneNode(true),
+          elementImage = cardElement.querySelector('.element__image'),
+          elementTitle = cardElement.querySelector('.element__title'),
+          deleteButton = cardElement.querySelector('.element__delete-button'),
+          likeButton = cardElement.querySelector('.element__like-button');
+  
+    elementImage.src = item.link;
+    elementImage.alt = item.name;
+    elementTitle.textContent = item.name;
+  
+    elementImage.addEventListener('click', function() {
+      openPopup(popupFullImage);
+      fullImage.src = item.link;
+      fullImage.alt = item.name;
+      fullImageTitle.textContent = item.name;
+    });
+  
+    deleteButton.addEventListener('click', function(evt) {
+      evt.target.closest('.element').remove();
+    });
+  
+    likeButton.addEventListener('click', function(evt) {
+      evt.target.classList.toggle('element__like-button_active');
+    });
 
-  elementImage.src = card.link;
-  elementImage.alt = card.name;
-  elementTitle.textContent = card.name;
-
-  elementImage.addEventListener('click', function() {
-    openPopup(popupFullImage);
-    fullImage.src = card.link;
-    fullImage.alt = card.name;
-    fullImageTitle.textContent = card.name;
+    elementsList.prepend(cardElement);
   });
-
-  deleteButton.addEventListener('click', function(evt) {
-    evt.target.closest('.element').remove();
-  });
-
-  likeButton.addEventListener('click', function(evt) {
-    evt.target.classList.toggle('element__like-button_active');
-  });
-
-  elementsList.append(cardElement);
-});
+}
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
 }
 
-function closePopup(evt) {
-  evt.target.closest('.popup').classList.remove('popup_opened');
+function closePopup() {
+  popups.forEach(popup => {
+    popup.classList.remove('popup_opened');
+  });
 }
+
+function submitEditForm(evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileProfession.textContent = professionInput.value;
+  closePopup();
+}
+
+function submitAddForm(evt) {
+  evt.preventDefault();
+
+  const newCard = {};
+  newCard.name = placeInput.value;
+  newCard.link = linkInput.value;
+
+  initialCards.push(newCard);
+  createCards([newCard]);
+  placeInput.value = '';
+  linkInput.value = '';
+
+  closePopup();
+}
+
+createCards(initialCards);
 
 editButton.addEventListener('click', function() {
   openPopup(popupEdit);
@@ -96,20 +126,5 @@ popupCloseButtons.forEach(closeButton => {
   closeButton.addEventListener('click', closePopup);
 });
 
-
-
-function submitEditForm(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileProfession.textContent = professionInput.value;
-  closePopup();
-}
-
-function submitAddForm(evt) {
-  evt.preventDefault();
-  closePopup();
-}
-
 editForm.addEventListener('submit', submitEditForm);
 addForm.addEventListener('submit', submitAddForm);
-
