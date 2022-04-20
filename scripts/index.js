@@ -1,21 +1,21 @@
 'use strict';
 
 const popupEdit = document.querySelector('.popup_type_edit'),
-      buttonCloseEdit = popupEdit.querySelector('.popup__close-button_type_edit'),
-      formEdit = popupEdit.querySelector('.popup__form_edit'),
+      buttonCloseEdit = popupEdit.querySelector('.popup__close-button'),
+      formEdit = popupEdit.querySelector('.popup__form'),
       nameInput = formEdit.querySelector('#name'),
       professionInput = formEdit.querySelector('#profession'),
       buttonEdit = document.querySelector('.profile__edit-button'),
       profileName = document.querySelector('.profile__name'),
       profileProfession = document.querySelector('.profile__profession'),
       popupAdd = document.querySelector('.popup_type_add'),
-      buttonCloseAdd = popupAdd.querySelector('.popup__close-button_type_add'),
-      formAdd = popupAdd.querySelector('.popup__form_add'),
+      buttonCloseAdd = popupAdd.querySelector('.popup__close-button'),
+      formAdd = popupAdd.querySelector('.popup__form'),
       placeInput = formAdd.querySelector('#place'),
       linkInput = formAdd.querySelector('#link'),
       buttonAdd = document.querySelector('.profile__add-button'),
       popupFullImage = document.querySelector('.popup_type_full-image'),
-      buttonCloseFullImage = popupFullImage.querySelector('.popup__close-button_type_full-image'),
+      buttonCloseFullImage = popupFullImage.querySelector('.popup__close-button'),
       fullImage = popupFullImage.querySelector('.popup__image'),
       fullImageTitle = popupFullImage.querySelector('.popup__image-title'),
       elementsList = document.querySelector('.elements__list'),
@@ -41,10 +41,6 @@ function openPopupFullImage(object) {
   fullImage.alt = object.name;
   fullImageTitle.textContent = object.name;
   openPopup(popupFullImage);
-}
-
-function handleFullImageOpen(obj) {
-  return () => openPopupFullImage(obj);
 }
 
 function closePopup(popupElement) {
@@ -82,7 +78,9 @@ function createCard(object) {
   elementImage.alt = object.name;
   elementTitle.textContent = object.name;
 
-  elementImage.addEventListener('click', handleFullImageOpen(object));
+  const handleFullImageOpen = () => openPopupFullImage(object);
+
+  elementImage.addEventListener('click', handleFullImageOpen);
   buttonDelete.addEventListener('click', handleElementDelete);
   buttonLike.addEventListener('click', handleLikeClick);
 
@@ -93,10 +91,6 @@ function renderCard(list, object) {
   const newCard = createCard(object);
   list.prepend(newCard);
 }
-
-initialCards.forEach(item => {
-  renderCard(elementsList, item);
-});
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
@@ -115,6 +109,10 @@ function handleAddFormSubmit(evt) {
   renderCard(elementsList, cardAdded);
   handlePopupAddClose();
 }
+
+initialCards.forEach(item => {
+  renderCard(elementsList, item);
+});
 
 buttonEdit.addEventListener('click', handlePopupEditOpen);
 buttonAdd.addEventListener('click', handlePopupAddOpen);
