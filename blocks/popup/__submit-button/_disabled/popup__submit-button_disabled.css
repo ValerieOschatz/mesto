@@ -3,7 +3,7 @@
   color: #000000;
   background-color: transparent;
   opacity: .2;
-  cursor: not-allowed;
+  cursor: auto;
 }
 
 .popup__submit-button_disabled:hover {

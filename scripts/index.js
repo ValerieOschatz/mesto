@@ -28,11 +28,12 @@ function openPopup(popupElement) {
 function handlePopupEditOpen() {
   nameInput.value = profileName.textContent;
   professionInput.value = profileProfession.textContent;
+  setFormStartSettings(formEdit, settings);
   openPopup(popupEdit);
 }
 
 function handlePopupAddOpen() {
-  formAdd.reset();
+  setFormStartSettings(formAdd, settings);
   openPopup(popupAdd);
 }
 
@@ -53,6 +54,7 @@ function handlePopupEditClose() {
 
 function handlePopupAddClose() {
   closePopup(popupAdd);
+  formAdd.reset();
 }
 
 function handlePopupFullImageClose() {

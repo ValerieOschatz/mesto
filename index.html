@@ -41,12 +41,12 @@
       <form class="popup__form" name="edit-form" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
         <label class="popup__form-field">
-          <input class="popup__input" type="text" id="name" name="name" placeholder="Имя" required>
-          <span class='popup__input-error' id='name-input-error'></span>
+          <input class="popup__input" type="text" id="name" name="name" placeholder="Имя" required minlength="2" maxlength="40">
+          <span class='popup__input-error name-error'></span>
         </label>
         <label class="popup__form-field">
-          <input class="popup__input" type="text" id="profession" name="profession" placeholder="О себе" required>
-          <span class='popup__input-error' id='profession-input-error'></span>
+          <input class="popup__input" type="text" id="profession" name="profession" placeholder="О себе" required minlength="2" maxlength="200">
+          <span class='popup__input-error profession-error'></span>
         </label>
         <button class="popup__submit-button" type="submit">Сохранить</button>
       </form>
@@ -59,12 +59,12 @@
       <form class="popup__form" name="add-form" novalidate>
         <h2 class="popup__title">Новое место</h2>
         <label class="popup__form-field">
-          <input class="popup__input" type="text" id="place" name="place" placeholder="Название" required>
-          <span class='popup__input-error' id='place-input-error'></span>
+          <input class="popup__input" type="text" id="place" name="place" placeholder="Название" required minlength="2" maxlength="30">
+          <span class='popup__input-error place-error'></span>
         </label>
         <label class="popup__form-field">
           <input class="popup__input" type="url" id="link" name="link" placeholder="Ссылка на картинку" required>
-          <span class='popup__input-error' id='link-input-error'></span>
+          <span class='popup__input-error link-error'></span>
         </label>
         <button class="popup__submit-button" type="submit">Создать</button>
       </form>
@@ -94,5 +94,6 @@
   </template>
   <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src=".//scripts/validate.js"></script>
 </body>
 </html>
