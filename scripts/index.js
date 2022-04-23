@@ -18,20 +18,6 @@ const popupEdit = document.querySelector('.popup_type_edit'),
       elementsList = document.querySelector('.elements__list'),
       elementTemplate = document.querySelector('.element-template').content;
 
-function handleClickPopupClose(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
-  if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close-button')) {
-    closePopup(popupOpened);
-  }
-}
-
-function handleKeyPopupClose(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape') {
-    closePopup(popupOpened);
-  }
-}
-
 function openPopup(popupElement) {
   popupElement.addEventListener('click', handleClickPopupClose);
   document.addEventListener('keydown', handleKeyPopupClose);
@@ -42,6 +28,19 @@ function closePopup(popupElement) {
   popupElement.removeEventListener('click', handleClickPopupClose);
   document.removeEventListener('keydown', handleKeyPopupClose);
   popupElement.classList.remove('popup_opened');
+}
+
+function handleClickPopupClose(evt) {
+  if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close-button')) {
+    closePopup(evt.currentTarget);
+  }
+}
+
+function handleKeyPopupClose(evt) {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
 }
 
 function handlePopupEditOpen() {
