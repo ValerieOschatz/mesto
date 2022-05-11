@@ -1,5 +1,3 @@
-'use strict';
-
 const settings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',

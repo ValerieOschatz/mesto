@@ -62,22 +62,28 @@ class Card {
     fullImage.src = this._image;
     fullImage.alt = this._title;
     fullImageTitle.textContent = this._title;
-    popupFullImage.classList.add('popup_opened');
+    openPopup(popupFullImage);
   }
-  
-  _handleClosePopup() {
-    fullImage.src = '';
-    fullImageTitle.textContent = '';
-    popupFullImage.classList.remove('popup_opened');
+
+  _handleElementDelete() {
+    this._element.remove();
+  }
+
+  _handleLikeClick() {
+    this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
   }
 
   _setEventListeners() {
-    this._element.addEventListener('click', () => {
+    this._element.querySelector('.element__image').addEventListener('click', () => {
       this._handleOpenPopup();
     })
-    
-    popupCloseButton.addEventListener('click', () => {
-      this._handleClosePopup();
+
+    this._element.querySelector('.element__delete-button').addEventListener('click', () => {
+      this._handleElementDelete();
+    })
+
+    this._element.querySelector('.element__like-button').addEventListener('click', () => {
+      this._handleLikeClick();
     })
   }
 }
@@ -88,4 +94,3 @@ initialCards.forEach((item) => {
 
   document.querySelector('.elements__list').prepend(cardElement);
 });
-
