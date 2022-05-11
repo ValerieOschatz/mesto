@@ -1,36 +1,12 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import {
+  popupFullImage,
+  fullImage,
+  fullImageTitle
+} from './data.js';
 
-const popupFullImage = document.querySelector('.popup_type_full-image'),
-      fullImage = popupFullImage.querySelector('.popup__image'),
-      fullImageTitle = popupFullImage.querySelector('.popup__image-title'),
-      popupCloseButton = popupFullImage.querySelector('.popup__close-button');
+import openPopup from './index.js';
 
-class Card {
+export default class Card {
   constructor(data) {
     this._image = data.link;
     this._title = data.name;
@@ -86,11 +62,4 @@ class Card {
       this._handleLikeClick();
     })
   }
-}
-
-initialCards.forEach((item) => {
-  const card = new Card(item);
-  const cardElement = card.generateCard();
-
-  document.querySelector('.elements__list').prepend(cardElement);
-});
+};
