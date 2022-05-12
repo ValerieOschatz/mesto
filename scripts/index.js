@@ -11,12 +11,13 @@ import {
   placeInput,
   linkInput,
   buttonAdd,
+  elementsList,
   initialCards,
   settings
 } from './data.js';
 
 import Card from './card.js';
-import setFormStartSettings from './formValidator.js';
+import FormValidator from './formValidator.js';
 
 export default function openPopup(popupElement) {
   popupElement.addEventListener('click', handleClickPopupClose);
@@ -46,14 +47,21 @@ function handleKeyPopupClose(evt) {
 function handlePopupEditOpen() {
   nameInput.value = profileName.textContent;
   professionInput.value = profileProfession.textContent;
-  setFormStartSettings(formEdit, settings);
+  setStartSettings(formEdit);
   openPopup(popupEdit);
 }
 
 function handlePopupAddOpen() {
   formAdd.reset();
-  setFormStartSettings(formAdd, settings);
+  setStartSettings(formAdd);
   openPopup(popupAdd);
+}
+
+function renderCard(list, card) {
+  const newCard = new Card(card, '.element-template');
+  const cardElement = newCard.generateCard();
+
+  list.prepend(cardElement);
 }
 
 function handleEditFormSubmit(evt) {
@@ -68,16 +76,26 @@ function handleAddFormSubmit(evt) {
   const cardAdded = {};
   cardAdded.name = placeInput.value;
   cardAdded.link = linkInput.value;
-  // renderCard(elementsList, cardAdded);
+  renderCard(elementsList, cardAdded);
   closePopup(popupAdd);
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item);
-  const cardElement = card.generateCard();
-
-  document.querySelector('.elements__list').prepend(cardElement);
+  renderCard(elementsList, item);
 });
+
+function validateForm(form) {
+  const validationForm = new FormValidator(settings, form);
+  validationForm.enableValidation();
+}
+
+function setStartSettings(form) {
+  const validationForm = new FormValidator(settings, form);
+  validationForm.setFormStartSettings();
+}
+
+validateForm(formEdit);
+validateForm(formAdd);
 
 buttonEdit.addEventListener('click', handlePopupEditOpen);
 buttonAdd.addEventListener('click', handlePopupAddOpen);

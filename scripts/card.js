@@ -7,15 +7,16 @@ import {
 import openPopup from './index.js';
 
 export default class Card {
-  constructor(data) {
+  constructor(data, cardSelector) {
     this._image = data.link;
     this._title = data.name;
     this._alt = data.name;
+    this._cardSelector = cardSelector;
   }
   
   _getTemplate() {
     const cardElement = document
-    .querySelector('.element-template')
+    .querySelector(this._cardSelector)
     .content
     .querySelector('.element')
     .cloneNode(true);
@@ -27,9 +28,12 @@ export default class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector('.element__image').src = this._image;
-    this._element.querySelector('.element__image').alt = this._title;
-    this._element.querySelector('.element__title').textContent = this._title;
+    const elementImage = this._element.querySelector('.element__image');
+    const elementTitle = this._element.querySelector('.element__title');
+
+    elementImage.src = this._image;
+    elementImage.alt = this._title;
+    elementTitle.textContent = this._title;
 
     return this._element;
   }
