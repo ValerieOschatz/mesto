@@ -10,7 +10,6 @@ export default class Card {
   constructor(data, cardSelector) {
     this._image = data.link;
     this._title = data.name;
-    this._alt = data.name;
     this._cardSelector = cardSelector;
   }
   
