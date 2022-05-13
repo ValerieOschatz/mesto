@@ -11,6 +11,9 @@ import {
   placeInput,
   linkInput,
   buttonAdd,
+  popupFullImage,
+  fullImage,
+  fullImageTitle,
   elementsList,
   initialCards,
   settings
@@ -19,7 +22,7 @@ import {
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
-export default function openPopup(popupElement) {
+function openPopup(popupElement) {
   popupElement.addEventListener('click', handleClickPopupClose);
   document.addEventListener('keydown', handleKeyPopupClose);
   popupElement.classList.add('popup_opened');
@@ -47,7 +50,7 @@ function handleKeyPopupClose(evt) {
 function validateForm(formElement) {
   const formValidate = new FormValidator(settings, formElement);
   formValidate.enableValidation();
-  formValidate.setFormStartSettings();
+  formValidate.cleanErrors();
 }
 
 function handlePopupEditOpen() {
@@ -63,22 +66,31 @@ function handlePopupAddOpen() {
   openPopup(popupAdd);
 }
 
+function openPopupFullImage(object) {
+  fullImage.src = object.link;
+  fullImage.alt = object.name;
+  fullImageTitle.textContent = object.name;
+  openPopup(popupFullImage);
+}
+
+function handleOpenPopupFullImage(obj) {
+  return () => openPopupFullImage(obj);
+}
+
 function renderCard(list, card) {
-  const newCard = new Card(card, '.element-template');
+  const newCard = new Card(card, '.element-template', handleOpenPopupFullImage(card));
   const cardElement = newCard.generateCard();
 
   list.prepend(cardElement);
 }
 
-function handleEditFormSubmit(evt) {
-  evt.preventDefault();
+function handleEditFormSubmit() {
   profileName.textContent = nameInput.value;
   profileProfession.textContent = professionInput.value;
   closePopup(popupEdit);
 }
 
-function handleAddFormSubmit(evt) {
-  evt.preventDefault();
+function handleAddFormSubmit() {
   const cardAdded = {};
   cardAdded.name = placeInput.value;
   cardAdded.link = linkInput.value;
