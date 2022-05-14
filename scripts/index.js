@@ -22,14 +22,17 @@ import {
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
+const profileValidation = new FormValidator(settings, formEdit);
+const newCardValidation = new FormValidator(settings, formAdd);
+
 function openPopup(popupElement) {
-  popupElement.addEventListener('click', handleClickPopupClose);
+  popupElement.addEventListener('mousedown', handleClickPopupClose);
   document.addEventListener('keydown', handleKeyPopupClose);
   popupElement.classList.add('popup_opened');
 }
 
 function closePopup(popupElement) {
-  popupElement.removeEventListener('click', handleClickPopupClose);
+  popupElement.removeEventListener('mousedown', handleClickPopupClose);
   document.removeEventListener('keydown', handleKeyPopupClose);
   popupElement.classList.remove('popup_opened');
 }
@@ -47,22 +50,16 @@ function handleKeyPopupClose(evt) {
   }
 }
 
-function validateForm(formElement) {
-  const formValidate = new FormValidator(settings, formElement);
-  formValidate.enableValidation();
-  formValidate.cleanErrors();
-}
-
 function handlePopupEditOpen() {
   nameInput.value = profileName.textContent;
   professionInput.value = profileProfession.textContent;
-  validateForm(formEdit);
+  profileValidation.cleanErrors();
   openPopup(popupEdit);
 }
 
 function handlePopupAddOpen() {
   formAdd.reset();
-  validateForm(formAdd);
+  newCardValidation.cleanErrors();
   openPopup(popupAdd);
 }
 
@@ -73,14 +70,18 @@ function openPopupFullImage(object) {
   openPopup(popupFullImage);
 }
 
-function handleOpenPopupFullImage(obj) {
-  return () => openPopupFullImage(obj);
+function handleOpenPopupFullImage(object) {
+  return () => openPopupFullImage(object);
+}
+
+function createCard(object) {
+  const newCard = new Card(object, '.element-template', handleOpenPopupFullImage(object));
+  const cardElement = newCard.generateCard();
+  return cardElement;
 }
 
 function renderCard(list, card) {
-  const newCard = new Card(card, '.element-template', handleOpenPopupFullImage(card));
-  const cardElement = newCard.generateCard();
-
+  const cardElement = createCard(card);
   list.prepend(cardElement);
 }
 
@@ -101,6 +102,9 @@ function handleAddFormSubmit() {
 initialCards.forEach((item) => {
   renderCard(elementsList, item);
 });
+
+profileValidation.enableValidation();
+newCardValidation.enableValidation();
 
 buttonEdit.addEventListener('click', handlePopupEditOpen);
 buttonAdd.addEventListener('click', handlePopupAddOpen);
