@@ -14,16 +14,27 @@ import {
   popupFullImage,
   fullImage,
   fullImageTitle,
-  elementsList,
+  // elementsList,
+  cardListSelector,
   initialCards,
   settings
 } from './data.js';
 
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 
 const profileValidation = new FormValidator(settings, formEdit);
 const newCardValidation = new FormValidator(settings, formAdd);
+
+const cardList = new Section({ 
+  items: initialCards,
+  renderer: (cardItem) => {
+    const card = new Card(cardItem, '.element-template', handleOpenPopupFullImage(cardItem));
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
+  }}, cardListSelector
+);
 
 function openPopup(popupElement) {
   popupElement.addEventListener('mousedown', handleClickPopupClose);
@@ -70,20 +81,20 @@ function openPopupFullImage(object) {
   openPopup(popupFullImage);
 }
 
-function handleOpenPopupFullImage(object) {
+export function handleOpenPopupFullImage(object) {
   return () => openPopupFullImage(object);
 }
 
-function createCard(object) {
-  const newCard = new Card(object, '.element-template', handleOpenPopupFullImage(object));
-  const cardElement = newCard.generateCard();
-  return cardElement;
-}
+// function createCard(object) {
+//   const newCard = new Card(object, '.element-template', handleOpenPopupFullImage(object));
+//   const cardElement = newCard.generateCard();
+//   return cardElement;
+// }
 
-function renderCard(list, card) {
-  const cardElement = createCard(card);
-  list.prepend(cardElement);
-}
+// function renderCard(list, card) {
+//   const cardElement = createCard(card);
+//   list.prepend(cardElement);
+// }
 
 function handleEditFormSubmit() {
   profileName.textContent = nameInput.value;
@@ -95,16 +106,17 @@ function handleAddFormSubmit() {
   const cardAdded = {};
   cardAdded.name = placeInput.value;
   cardAdded.link = linkInput.value;
-  renderCard(elementsList, cardAdded);
+  // renderCard(elementsList, cardAdded);
   closePopup(popupAdd);
 }
 
-initialCards.forEach((item) => {
-  renderCard(elementsList, item);
-});
+// initialCards.forEach((item) => {
+//   renderCard(elementsList, item);
+// });
 
 profileValidation.enableValidation();
 newCardValidation.enableValidation();
+cardList.renderItems();
 
 buttonEdit.addEventListener('click', handlePopupEditOpen);
 buttonAdd.addEventListener('click', handlePopupAddOpen);
