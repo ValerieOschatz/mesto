@@ -13,8 +13,10 @@ const buttonAdd = document.querySelector('.profile__add-button');
 const popupFullImage = document.querySelector('.popup_type_full-image');
 const fullImage = popupFullImage.querySelector('.popup__image');
 const fullImageTitle = popupFullImage.querySelector('.popup__image-title');
-// const elementsList = document.querySelector('.elements__list');
+const elementsList = document.querySelector('.elements__list');
 const cardListSelector = '.elements__list';
+const popupEditSelector = '.popup_type_edit';
+const popupImageSelector = '.popup_type_full-image';
 
 const initialCards = [
   {
@@ -67,8 +69,10 @@ export {
   popupFullImage,
   fullImage,
   fullImageTitle,
-  // elementsList,
+  elementsList,
   cardListSelector,
+  popupEditSelector,
+  popupImageSelector,
   initialCards,
   settings
 };
