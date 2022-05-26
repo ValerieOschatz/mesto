@@ -1,7 +1,7 @@
 const popupEdit = document.querySelector('.popup_type_edit');
 const formEdit = popupEdit.querySelector('.popup__form');
 const nameInput = formEdit.querySelector('#profileName');
-const professionInput = formEdit.querySelector('#profession');
+const professionInput = formEdit.querySelector('#profileInfo');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
@@ -15,9 +15,11 @@ const fullImage = popupFullImage.querySelector('.popup__image');
 const fullImageTitle = popupFullImage.querySelector('.popup__image-title');
 const elementsList = document.querySelector('.elements__list');
 const cardListSelector = '.elements__list';
-const popupEditSelector = '.popup_type_edit';
 const popupImageSelector = '.popup_type_full-image';
 const popupAddSelector = '.popup_type_add';
+const popupEditSelector = '.popup_type_edit';
+const profileNameSelector = '.profile__name';
+const profileInfoSelector = '.profile__profession';
 
 const initialCards = [
   {
@@ -72,9 +74,11 @@ export {
   fullImageTitle,
   elementsList,
   cardListSelector,
-  popupEditSelector,
   popupImageSelector,
   popupAddSelector,
+  popupEditSelector,
+  profileNameSelector,
+  profileInfoSelector,
   initialCards,
   settings
 };

@@ -1,5 +1,5 @@
 import {
-  popupEdit,
+  // popupEdit,
   formEdit,
   nameInput,
   professionInput,
@@ -19,7 +19,10 @@ import {
   settings,
   cardListSelector,
   popupImageSelector,
-  popupAddSelector
+  popupAddSelector,
+  popupEditSelector,
+  profileNameSelector,
+  profileInfoSelector
 } from './data.js';
 
 import Card from './Card.js';
@@ -27,6 +30,7 @@ import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 function createCard(object) {
   const newCard = new Card(object, '.element-template', handleOpenPopupFullImage(object));
@@ -44,7 +48,7 @@ const cardList = new Section({
 
 const profileValidation = new FormValidator(settings, formEdit);
 const newCardValidation = new FormValidator(settings, formAdd);
-
+const profileInfo = new UserInfo({ profileNameSelector, profileInfoSelector });
 const popupFullImage = new PopupWithImage(popupImageSelector);
 
 const popupFormAdd = new PopupWithForm({
@@ -52,6 +56,13 @@ const popupFormAdd = new PopupWithForm({
   handleFormSubmit: (formData) => {
     const cardAdded = createCard(formData);
     cardList.addItem(cardAdded);
+  }
+});
+
+const popupFormEdit = new PopupWithForm({
+  popupSelector: popupEditSelector,
+  handleFormSubmit: (formData) => {
+    profileInfo.setUserInfo(formData);
   }
 });
 
@@ -64,33 +75,21 @@ function handlePopupAddOpen() {
   popupFormAdd.open();
 }
 
+function handlePopupEditOpen() {
+  const startInputValues = profileInfo.getUserInfo();
+  nameInput.value = startInputValues.name;
+  professionInput.value = startInputValues.info;
 
-
-// function handlePopupEditOpen() {
-//   nameInput.value = profileName.textContent;
-//   professionInput.value = profileProfession.textContent;
-//   profileValidation.cleanErrors();
-//   openPopup(popupEdit);
-// }
-
-// function renderCard(list, card) {
-//   const cardElement = createCard(card);
-//   list.prepend(cardElement);
-// }
-
-// function handleEditFormSubmit() {
-//   profileName.textContent = nameInput.value;
-//   profileProfession.textContent = professionInput.value;
-//   closePopup(popupEdit);
-// }
+  profileValidation.cleanErrors();
+  popupFormEdit.open();
+}
 
 cardList.renderItems();
 profileValidation.enableValidation();
 newCardValidation.enableValidation();
 popupFullImage.setEventListeners();
 popupFormAdd.setEventListeners();
+popupFormEdit.setEventListeners();
 
-// buttonEdit.addEventListener('click', handlePopupEditOpen);
+buttonEdit.addEventListener('click', handlePopupEditOpen);
 buttonAdd.addEventListener('click', handlePopupAddOpen);
-// formEdit.addEventListener('submit', handleEditFormSubmit);
-// formAdd.addEventListener('submit', handleAddFormSubmit);
