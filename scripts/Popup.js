@@ -4,12 +4,16 @@ export default class Popup {
   }
 
   open() {
-    this._setEventListeners();
+    document.addEventListener('keydown', (evt) => {
+      this._handleEscClose(evt);
+    });
     this._popup.classList.add('popup_opened');
   }
 
   close() {
-    this._removeEventListeners();
+    document.removeEventListener('keydown', (evt) => {
+      this._handleEscClose(evt);
+    });
     this._popup.classList.remove('popup_opened');
   }
 
@@ -25,22 +29,8 @@ export default class Popup {
     }
   }
 
-  _setEventListeners() {
-    document.addEventListener('keydown', (evt) => {
-      this._handleEscClose(evt);
-    });
-
+  setEventListeners() {
     this._popup.addEventListener('mousedown', (evt) => {
-      this._handleClickClose(evt);
-    });
-  }
-
-  _removeEventListeners() {
-    document.removeEventListener('keydown', (evt) => {
-      this._handleEscClose(evt);
-    });
-
-    this._popup.removeEventListener('mousedown', (evt) => {
       this._handleClickClose(evt);
     });
   }
