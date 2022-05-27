@@ -1,28 +1,18 @@
 import {
-  // popupEdit,
   formEdit,
+  formAdd,
   nameInput,
   professionInput,
   buttonEdit,
-  profileName,
-  profileProfession,
-  // popupAdd,
-  formAdd,
-  placeInput,
-  linkInput,
   buttonAdd,
-  // popupFullImage,
-  fullImage,
-  fullImageTitle,
-  elementsList,
-  initialCards,
-  settings,
   cardListSelector,
   popupImageSelector,
   popupAddSelector,
   popupEditSelector,
   profileNameSelector,
-  profileInfoSelector
+  profileInfoSelector,
+  initialCards,
+  settings
 } from './data.js';
 
 import Card from './Card.js';
@@ -76,12 +66,15 @@ function handlePopupAddOpen() {
 }
 
 function handlePopupEditOpen() {
-  const startInputValues = profileInfo.getUserInfo();
-  nameInput.value = startInputValues.name;
-  professionInput.value = startInputValues.info;
-
+  setStartValues();
   profileValidation.cleanErrors();
   popupFormEdit.open();
+}
+
+function setStartValues() {
+  const { name, info } = profileInfo.getUserInfo();
+  nameInput.value = name;
+  professionInput.value = info;
 }
 
 cardList.renderItems();
