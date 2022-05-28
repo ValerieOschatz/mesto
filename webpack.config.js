@@ -10,7 +10,8 @@ module.exports = {
     filename: 'main.js',
         publicPath: ''
   },
-    mode: 'development',
+  mode: 'development',
+  devtool: 'source-map',
   devServer: {
     static: {
       directory: path.resolve(__dirname, './dist')
