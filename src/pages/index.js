@@ -23,6 +23,20 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
+
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-43',
+  token: 'b7beb2f2-51a9-4b03-8658-31d9c29a3434'
+})
+
+api.getUserInfo()
+.then((userData) => {
+  profileInfo.setUserInfo(userData);
+})
+.catch((err) => {
+  console.log(err);
+})
 
 function createCard(object) {
   const newCard = new Card(object, '.element-template', handleOpenPopupFullImage(object));
