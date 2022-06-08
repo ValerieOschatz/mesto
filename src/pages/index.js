@@ -13,7 +13,6 @@ import {
   popupEditSelector,
   profileNameSelector,
   profileInfoSelector,
-  initialCards,
   settings
 } from '../utils/data.js';
 
@@ -38,6 +37,14 @@ api.getUserInfo()
   console.log(err);
 })
 
+api.getInitialCards()
+.then((cardData) => {
+  cardList.renderItems(cardData);
+})
+.catch((err) => {
+  console.log(err);
+})
+
 function createCard(object) {
   const newCard = new Card(object, '.element-template', handleOpenPopupFullImage(object));
   const cardElement = newCard.generateCard();
@@ -45,12 +52,11 @@ function createCard(object) {
 }
 
 const cardList = new Section({
-  items: initialCards,
   renderer: (cardItem) => {
     const card = createCard(cardItem);
     cardList.addItem(card);
-  },
-}, cardListSelector);
+  }},
+ cardListSelector);
 
 const profileValidation = new FormValidator(settings, formEdit);
 const newCardValidation = new FormValidator(settings, formAdd);
@@ -93,7 +99,7 @@ function setStartValues() {
   professionInput.value = info;
 }
 
-cardList.renderItems();
+// cardList.renderItems();
 profileValidation.enableValidation();
 newCardValidation.enableValidation();
 popupFullImage.setEventListeners();
