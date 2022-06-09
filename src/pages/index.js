@@ -26,7 +26,7 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
 function createCard(object) {
-  const newCard = new Card(object, 'b7beb2f2-51a9-4b03-8658-31d9c29a3434', '.element-template', handleOpenPopupFullImage(object));
+  const newCard = new Card(object, profileInfo.userId, '.element-template', handleOpenPopupFullImage(object));
   const cardElement = newCard.generateCard();
   return cardElement;
 }
@@ -52,6 +52,7 @@ api.getUserInfo()
 .then((userData) => {
   profileInfo.setUserInfo(userData);
   profileInfo.setAvatar(userData);
+  profileInfo.setUserId(userData);
 })
 .catch((err) => {
   console.log(err);

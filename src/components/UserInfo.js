@@ -18,4 +18,8 @@ export default class UserInfo {
   setAvatar({ avatar }) {
     this._avatar.src = avatar;
   }
+
+  setUserId({ _id }) {
+    this.userId = _id;
+  }
 }
