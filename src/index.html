@@ -14,7 +14,7 @@
   <main class="main">
     <section class="profile">
       <button class="profile__avatar-button"></button>
-      <img class="profile__avatar" src="<%=require('./images/Kusto.jpg')%>" alt="Кусто в красной шапке">
+      <img class="profile__avatar" src="" alt="Аватар">
       <div class="profile__info">
         <div class="profile__name-container">
           <h1 class="profile__name"></h1>
@@ -41,11 +41,11 @@
       <form class="popup__form" name="edit-form" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
         <label class="popup__form-field">
-          <input class="popup__input" type="text" id="profileName" name="profileName" placeholder="Имя" required minlength="2" maxlength="40">
+          <input class="popup__input" type="text" id="profileName" name="name" placeholder="Имя" required minlength="2" maxlength="40">
           <span class='popup__input-error profileName-error'></span>
         </label>
         <label class="popup__form-field">
-          <input class="popup__input" type="text" id="profileInfo" name="profileInfo" placeholder="О себе" required minlength="2" maxlength="200">
+          <input class="popup__input" type="text" id="profileInfo" name="about" placeholder="О себе" required minlength="2" maxlength="200">
           <span class='popup__input-error profileInfo-error'></span>
         </label>
         <button class="popup__submit-button" type="submit">Сохранить</button>

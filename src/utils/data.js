@@ -10,6 +10,7 @@ const popupAddSelector = '.popup_type_add';
 const popupEditSelector = '.popup_type_edit';
 const profileNameSelector = '.profile__name';
 const profileInfoSelector = '.profile__profession';
+const avatarSelector = '.profile__avatar';
 
 const settings = {
   inputSelector: '.popup__input',
@@ -32,5 +33,6 @@ export {
   popupEditSelector,
   profileNameSelector,
   profileInfoSelector,
+  avatarSelector,
   settings
 };

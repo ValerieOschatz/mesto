@@ -13,6 +13,7 @@ import {
   popupEditSelector,
   profileNameSelector,
   profileInfoSelector,
+  avatarSelector,
   settings
 } from '../utils/data.js';
 
@@ -23,27 +24,6 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
-
-const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-43',
-  token: 'b7beb2f2-51a9-4b03-8658-31d9c29a3434'
-})
-
-api.getUserInfo()
-.then((userData) => {
-  profileInfo.setUserInfo(userData);
-})
-.catch((err) => {
-  console.log(err);
-})
-
-api.getInitialCards()
-.then((cardData) => {
-  cardList.renderItems(cardData);
-})
-.catch((err) => {
-  console.log(err);
-})
 
 function createCard(object) {
   const newCard = new Card(object, '.element-template', handleOpenPopupFullImage(object));
@@ -60,8 +40,30 @@ const cardList = new Section({
 
 const profileValidation = new FormValidator(settings, formEdit);
 const newCardValidation = new FormValidator(settings, formAdd);
-const profileInfo = new UserInfo({ profileNameSelector, profileInfoSelector });
+const profileInfo = new UserInfo({ profileNameSelector, profileInfoSelector, avatarSelector });
 const popupFullImage = new PopupWithImage(popupImageSelector);
+
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-43',
+  token: 'b7beb2f2-51a9-4b03-8658-31d9c29a3434'
+})
+
+api.getUserInfo()
+.then((userData) => {
+  profileInfo.setUserInfo(userData);
+  profileInfo.setAvatar(userData);
+})
+.catch((err) => {
+  console.log(err);
+})
+
+api.getInitialCards()
+.then((cardData) => {
+  cardList.renderItems(cardData);
+})
+.catch((err) => {
+  console.log(err);
+})
 
 const popupFormAdd = new PopupWithForm({
   popupSelector: popupAddSelector,
@@ -74,7 +76,13 @@ const popupFormAdd = new PopupWithForm({
 const popupFormEdit = new PopupWithForm({
   popupSelector: popupEditSelector,
   handleFormSubmit: (formData) => {
-    profileInfo.setUserInfo(formData);
+    api.setUserData(formData)
+    .then((formData) => {
+      profileInfo.setUserInfo(formData);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 });
 
@@ -99,7 +107,6 @@ function setStartValues() {
   professionInput.value = info;
 }
 
-// cardList.renderItems();
 profileValidation.enableValidation();
 newCardValidation.enableValidation();
 popupFullImage.setEventListeners();
