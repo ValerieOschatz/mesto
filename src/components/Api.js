@@ -45,7 +45,7 @@ export default class Api {
 
   addCard({ name, link }) {
     return fetch(`${this._url}/cards`, {
-      method: 'PATCH',
+      method: 'POST',
       headers: {
         authorization: this._token,
         'Content-Type': 'application/json'

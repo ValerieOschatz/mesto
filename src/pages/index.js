@@ -26,7 +26,7 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
 function createCard(object) {
-  const newCard = new Card(object, '.element-template', handleOpenPopupFullImage(object));
+  const newCard = new Card(object, 'b7beb2f2-51a9-4b03-8658-31d9c29a3434', '.element-template', handleOpenPopupFullImage(object));
   const cardElement = newCard.generateCard();
   return cardElement;
 }
@@ -68,8 +68,14 @@ api.getInitialCards()
 const popupFormAdd = new PopupWithForm({
   popupSelector: popupAddSelector,
   handleFormSubmit: (formData) => {
-    const cardAdded = createCard(formData);
-    cardList.addItem(cardAdded);
+    api.addCard(formData)
+    .then((res) => {
+      const cardAdded = createCard(res);
+      cardList.addItem(createCard(cardAdded));
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 });
 
@@ -77,8 +83,8 @@ const popupFormEdit = new PopupWithForm({
   popupSelector: popupEditSelector,
   handleFormSubmit: (formData) => {
     api.setUserData(formData)
-    .then((formData) => {
-      profileInfo.setUserInfo(formData);
+    .then((res) => {
+      profileInfo.setUserInfo(res);
     })
     .catch((err) => {
       console.log(err);
