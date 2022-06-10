@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({ link, name, owner, likes, _id }, userId, cardSelector, handleImageClick, handlePopupVerificationOpen) {
+  constructor({ link, name, owner, likes, _id }, userId, cardSelector, handleImageClick, handlePopupVerificationOpen, handleLikeClick) {
     this._image = link;
     this._title = name;
     this._ownerId = owner._id;
@@ -8,8 +8,8 @@ export default class Card {
     this._userId = userId;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    // this._setLikes = setLikes;
     this._handlePopupVerificationOpen = handlePopupVerificationOpen;
+    this._handleLikeClick = handleLikeClick;
   }
   
   _getTemplate() {
@@ -34,6 +34,10 @@ export default class Card {
     if(this._userId !== this._ownerId) {
       this._elementDeleteButton.remove();
     }
+
+    if (this.checkLike()) {
+      this._elementLikeButton.classList.add('element__like-button_active');
+    }
     
     this._elementImage.src = this._image;
     this._elementImage.alt = this._title;
@@ -43,18 +47,22 @@ export default class Card {
     return this._element;
   }
 
-  // countLikes(array) {
-  //   this._elementLikeCounter.textContent = array.length;
-  // }
-
   handleElementDelete() {
     this._element.remove();
     this._element = null;
   }
 
-  _handleLikeClick() {
-    this._elementLikeButton.classList.toggle('element__like-button_active');
+  countLikes({ likes }) {
+    this._likes = likes;
+    this._elementLikeCounter.textContent = likes.length;
+    if (this.checkLike()) {
+      this._elementLikeButton.classList.add('element__like-button_active');
+    } else {
+      this._elementLikeButton.classList.remove('element__like-button_active');
+    }
   }
+
+  checkLike = () => this._likes.some(like => like._id === this._userId);
 
   _setEventListeners() {
     this._elementImage.addEventListener('click', () => {
@@ -66,7 +74,7 @@ export default class Card {
     })
 
     this._elementLikeButton.addEventListener('click', () => {
-      this._handleLikeClick();
+      this._handleLikeClick(this._cardId, this);
     })
   }
 };

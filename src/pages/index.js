@@ -28,7 +28,7 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
 function createCard(object) {
-  const newCard = new Card(object, profileInfo.userId, '.element-template', handleOpenPopupFullImage, handlePopupVerificationOpen);
+  const newCard = new Card(object, profileInfo.userId, '.element-template', handleOpenPopupFullImage, handlePopupVerificationOpen, handleLikeClick);
   const cardElement = newCard.generateCard();
   return cardElement;
 }
@@ -131,6 +131,26 @@ function handleOpenPopupFullImage(link, name) {
 
 function handlePopupVerificationOpen(cardId, card) {
   popupVerification.open(cardId, card);
+}
+
+function handleLikeClick(cardId, card) {
+  if (card.checkLike()) {
+    api.removeCardLike(cardId)
+    .then((res) => {
+      card.countLikes(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  } else {
+    api.setCardLike(cardId)
+    .then((res) => {
+      card.countLikes(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
 }
 
 profileValidation.enableValidation();
