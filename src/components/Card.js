@@ -1,13 +1,15 @@
 export default class Card {
-  constructor({ link, name, owner, likes }, userId, cardSelector, handleImageClick, setLikes) {
+  constructor({ link, name, owner, likes, _id }, userId, cardSelector, handleImageClick, handlePopupVerificationOpen) {
     this._image = link;
     this._title = name;
     this._ownerId = owner._id;
     this._likes = likes;
+    this._cardId = _id;
     this._userId = userId;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    this._setLikes = setLikes;
+    // this._setLikes = setLikes;
+    this._handlePopupVerificationOpen = handlePopupVerificationOpen;
   }
   
   _getTemplate() {
@@ -45,7 +47,7 @@ export default class Card {
   //   this._elementLikeCounter.textContent = array.length;
   // }
 
-  _handleElementDelete() {
+  handleElementDelete() {
     this._element.remove();
     this._element = null;
   }
@@ -56,11 +58,11 @@ export default class Card {
 
   _setEventListeners() {
     this._elementImage.addEventListener('click', () => {
-      this._handleImageClick();
+      this._handleImageClick(this._image, this._title);
     })
 
     this._elementDeleteButton.addEventListener('click', () => {
-      this._handleElementDelete();
+      this._handlePopupVerificationOpen(this._cardId, this);
     })
 
     this._elementLikeButton.addEventListener('click', () => {

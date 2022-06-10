@@ -11,6 +11,7 @@ import {
   popupImageSelector,
   popupAddSelector,
   popupEditSelector,
+  popupDeleteSelector,
   profileNameSelector,
   profileInfoSelector,
   avatarSelector,
@@ -22,11 +23,12 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithVerification from '../components/PopupWithVerification.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
 function createCard(object) {
-  const newCard = new Card(object, profileInfo.userId, '.element-template', handleOpenPopupFullImage(object));
+  const newCard = new Card(object, profileInfo.userId, '.element-template', handleOpenPopupFullImage, handlePopupVerificationOpen);
   const cardElement = newCard.generateCard();
   return cardElement;
 }
@@ -72,7 +74,7 @@ const popupFormAdd = new PopupWithForm({
     api.addCard(formData)
     .then((res) => {
       const cardAdded = createCard(res);
-      cardList.addItem(createCard(cardAdded));
+      cardList.addItem(cardAdded);
     })
     .catch((err) => {
       console.log(err);
@@ -93,8 +95,23 @@ const popupFormEdit = new PopupWithForm({
   }
 });
 
-function handleOpenPopupFullImage(object) {
-  return () => popupFullImage.open(object);
+const popupVerification = new PopupWithVerification({
+  popupSelector: popupDeleteSelector,
+  handleFormSubmit: (cardId, card) => {
+    api.deleteCard(cardId)
+    .then(() => {
+      card.handleElementDelete();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+});
+
+function setStartValues() {
+  const { name, info } = profileInfo.getUserInfo();
+  nameInput.value = name;
+  professionInput.value = info;
 }
 
 function handlePopupAddOpen() {
@@ -108,10 +125,12 @@ function handlePopupEditOpen() {
   popupFormEdit.open();
 }
 
-function setStartValues() {
-  const { name, info } = profileInfo.getUserInfo();
-  nameInput.value = name;
-  professionInput.value = info;
+function handleOpenPopupFullImage(link, name) {
+  popupFullImage.open(link, name);
+}
+
+function handlePopupVerificationOpen(cardId, card) {
+  popupVerification.open(cardId, card);
 }
 
 profileValidation.enableValidation();
@@ -119,6 +138,7 @@ newCardValidation.enableValidation();
 popupFullImage.setEventListeners();
 popupFormAdd.setEventListeners();
 popupFormEdit.setEventListeners();
+popupVerification.setEventListeners();
 
 buttonEdit.addEventListener('click', handlePopupEditOpen);
 buttonAdd.addEventListener('click', handlePopupAddOpen);

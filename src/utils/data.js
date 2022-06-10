@@ -8,6 +8,7 @@ const cardListSelector = '.elements__list';
 const popupImageSelector = '.popup_type_full-image';
 const popupAddSelector = '.popup_type_add';
 const popupEditSelector = '.popup_type_edit';
+const popupDeleteSelector = '.popup_type_delete-card';
 const profileNameSelector = '.profile__name';
 const profileInfoSelector = '.profile__profession';
 const avatarSelector = '.profile__avatar';
@@ -31,6 +32,7 @@ export {
   popupImageSelector,
   popupAddSelector,
   popupEditSelector,
+  popupDeleteSelector,
   profileNameSelector,
   profileInfoSelector,
   avatarSelector,
