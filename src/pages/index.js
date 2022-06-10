@@ -3,15 +3,18 @@ import './index.css';
 import {
   formEdit,
   formAdd,
+  formAvatar,
   nameInput,
   professionInput,
   buttonEdit,
   buttonAdd,
+  buttonAvatar,
   cardListSelector,
   popupImageSelector,
   popupAddSelector,
   popupEditSelector,
   popupDeleteSelector,
+  popupAvatarSelector,
   profileNameSelector,
   profileInfoSelector,
   avatarSelector,
@@ -42,6 +45,7 @@ const cardList = new Section({
 
 const profileValidation = new FormValidator(settings, formEdit);
 const newCardValidation = new FormValidator(settings, formAdd);
+const avatarValidation = new FormValidator(settings, formAvatar);
 const profileInfo = new UserInfo({ profileNameSelector, profileInfoSelector, avatarSelector });
 const popupFullImage = new PopupWithImage(popupImageSelector);
 
@@ -108,6 +112,19 @@ const popupVerification = new PopupWithVerification({
   }
 });
 
+const popupFormAvatar = new PopupWithForm({
+  popupSelector: popupAvatarSelector,
+  handleFormSubmit: (formData) => {
+    api.changeAvatar(formData)
+    .then((res) => {
+      profileInfo.setAvatar(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+});
+
 function setStartValues() {
   const { name, info } = profileInfo.getUserInfo();
   nameInput.value = name;
@@ -133,6 +150,11 @@ function handlePopupVerificationOpen(cardId, card) {
   popupVerification.open(cardId, card);
 }
 
+function handlePopupAvatarOpen() {
+  avatarValidation.cleanErrors();
+  popupFormAvatar.open();
+}
+
 function handleLikeClick(cardId, card) {
   if (card.checkLike()) {
     api.removeCardLike(cardId)
@@ -155,10 +177,13 @@ function handleLikeClick(cardId, card) {
 
 profileValidation.enableValidation();
 newCardValidation.enableValidation();
+avatarValidation.enableValidation();
 popupFullImage.setEventListeners();
 popupFormAdd.setEventListeners();
 popupFormEdit.setEventListeners();
 popupVerification.setEventListeners();
+popupFormAvatar.setEventListeners();
 
 buttonEdit.addEventListener('click', handlePopupEditOpen);
 buttonAdd.addEventListener('click', handlePopupAddOpen);
+buttonAvatar.addEventListener('click', handlePopupAvatarOpen);
