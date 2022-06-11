@@ -75,6 +75,7 @@ api.getInitialCards()
 const popupFormAdd = new PopupWithForm({
   popupSelector: popupAddSelector,
   handleFormSubmit: (formData) => {
+    popupFormAdd.renderLoading(true);
     api.addCard(formData)
     .then((res) => {
       const cardAdded = createCard(res);
@@ -83,18 +84,25 @@ const popupFormAdd = new PopupWithForm({
     .catch((err) => {
       console.log(err);
     })
+    .finally(() => {
+      popupFormAdd.renderLoading(false);
+    })
   }
 });
 
 const popupFormEdit = new PopupWithForm({
   popupSelector: popupEditSelector,
   handleFormSubmit: (formData) => {
+    popupFormEdit.renderLoading(true);
     api.setUserData(formData)
     .then((res) => {
       profileInfo.setUserInfo(res);
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupFormEdit.renderLoading(false);
     })
   }
 });
@@ -115,12 +123,16 @@ const popupVerification = new PopupWithVerification({
 const popupFormAvatar = new PopupWithForm({
   popupSelector: popupAvatarSelector,
   handleFormSubmit: (formData) => {
+    popupFormAvatar.renderLoading(true);
     api.changeAvatar(formData)
     .then((res) => {
       profileInfo.setAvatar(res);
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupFormAvatar.renderLoading(false);
     })
   }
 });
