@@ -54,19 +54,12 @@ const api = new Api({
   token: 'b7beb2f2-51a9-4b03-8658-31d9c29a3434'
 })
 
-api.getUserInfo()
-.then((userData) => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+.then(([userData, cardData]) => {
   profileInfo.setUserInfo(userData);
   profileInfo.setAvatar(userData);
   profileInfo.setUserId(userData);
-})
-.catch((err) => {
-  console.log(err);
-})
-
-api.getInitialCards()
-.then((cardData) => {
-  cardList.renderItems(cardData);
+  cardList.renderItems(cardData.reverse());
 })
 .catch((err) => {
   console.log(err);
@@ -162,7 +155,8 @@ function handlePopupVerificationOpen(cardId, card) {
   popupVerification.open(cardId, card);
 }
 
-function handlePopupAvatarOpen() {
+function handlePopupAvatarOpen(evt) {
+  evt.preventDefault();
   avatarValidation.cleanErrors();
   popupFormAvatar.open();
 }

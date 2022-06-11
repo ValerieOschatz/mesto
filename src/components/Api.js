@@ -18,7 +18,7 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(this._checkServerRes);
+    .then((res) => this._checkServerRes(res));
   }
 
   getInitialCards() {
@@ -28,7 +28,7 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(this._checkServerRes);
+    .then((res) => this._checkServerRes(res));
   }
 
   setUserData({ name, about }) {
@@ -40,7 +40,7 @@ export default class Api {
       },
       body: JSON.stringify({ name, about })
     })
-    .then(this._checkServerRes);
+    .then((res) => this._checkServerRes(res));
   }
 
   addCard({ name, link }) {
@@ -52,7 +52,7 @@ export default class Api {
       },
       body: JSON.stringify({ name, link })
     })
-    .then(this._checkServerRes);
+    .then((res) => this._checkServerRes(res));
   }
 
   setCardLike(cardId) {
@@ -62,7 +62,7 @@ export default class Api {
         authorization: this._token,
       }
     })
-    .then(this._checkServerRes);
+    .then((res) => this._checkServerRes(res));
   }
 
   removeCardLike(cardId) {
@@ -72,7 +72,7 @@ export default class Api {
         authorization: this._token,
       }
     })
-    .then(this._checkServerRes);
+    .then((res) => this._checkServerRes(res));
   }
 
   deleteCard(cardId) {
@@ -82,7 +82,7 @@ export default class Api {
         authorization: this._token,
       }
     })
-    .then(this._checkServerRes);
+    .then((res) => this._checkServerRes(res));
   }
 
   changeAvatar({ avatar }) {
@@ -94,6 +94,6 @@ export default class Api {
       },
       body: JSON.stringify({ avatar })
     })
-    .then(this._checkServerRes);
+    .then((res) => this._checkServerRes(res));
   }
 }

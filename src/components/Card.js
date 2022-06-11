@@ -55,11 +55,10 @@ export default class Card {
   countLikes({ likes }) {
     this._likes = likes;
     this._elementLikeCounter.textContent = likes.length;
-    if (this.checkLike()) {
-      this._elementLikeButton.classList.add('element__like-button_active');
-    } else {
-      this._elementLikeButton.classList.remove('element__like-button_active');
-    }
+
+    this.checkLike() 
+    ? this._elementLikeButton.classList.add('element__like-button_active') 
+    : this._elementLikeButton.classList.remove('element__like-button_active');
   }
 
   checkLike = () => this._likes.some(like => like._id === this._userId);
