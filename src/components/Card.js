@@ -35,14 +35,10 @@ export default class Card {
       this._elementDeleteButton.remove();
     }
 
-    if (this.checkLike()) {
-      this._elementLikeButton.classList.add('element__like-button_active');
-    }
-    
+    this._toggleLikes();
     this._elementImage.src = this._image;
     this._elementImage.alt = this._title;
     this._elementTitle.textContent = this._title;
-    this._elementLikeCounter.textContent = this._likes.length;
 
     return this._element;
   }
@@ -54,14 +50,14 @@ export default class Card {
 
   checkLike = () => this._likes.some(like => like._id === this._userId);
 
-  _countLikes(likes) {
-    this._likes = likes;
-    this._elementLikeCounter.textContent = likes.length;
+  _toggleLikes() {
+    this._elementLikeButton.classList.toggle('element__like-button_active', this.checkLike());
+    this._elementLikeCounter.textContent = this._likes.length;
   }
 
   setLikes({ likes }) {
-    this._countLikes(likes);
-    this._elementLikeButton.classList.toggle('element__like-button_active');
+    this._likes = likes;
+    this._toggleLikes();
   }
 
   _setEventListeners() {

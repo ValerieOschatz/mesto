@@ -10,16 +10,10 @@ export default class UserInfo {
     return userData;
   }
 
-  setUserInfo({ name, about }) {
+  setUserInfo({ name, about, avatar, _id }) {
     this._name.textContent = name;
     this._info.textContent = about;
-  }
-
-  setAvatar({ avatar }) {
     this._avatar.style.backgroundImage = `url('${avatar}')`;
-  }
-
-  setUserId({ _id }) {
     this.userId = _id;
   }
 }

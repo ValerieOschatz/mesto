@@ -51,14 +51,15 @@ const popupFullImage = new PopupWithImage(popupImageSelector);
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-43',
-  token: 'b7beb2f2-51a9-4b03-8658-31d9c29a3434'
+  headers: {
+    authorization: 'b7beb2f2-51a9-4b03-8658-31d9c29a3434',
+    'Content-Type': 'application/json'
+  }
 })
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
 .then(([userData, cardData]) => {
   profileInfo.setUserInfo(userData);
-  profileInfo.setAvatar(userData);
-  profileInfo.setUserId(userData);
   cardList.renderItems(cardData.reverse());
 })
 .catch((err) => {
@@ -73,6 +74,7 @@ const popupFormAdd = new PopupWithForm({
     .then((res) => {
       const cardAdded = createCard(res);
       cardList.addItem(cardAdded);
+      popupFormAdd.close();
     })
     .catch((err) => {
       console.log(err);
@@ -90,6 +92,7 @@ const popupFormEdit = new PopupWithForm({
     api.setUserData(formData)
     .then((res) => {
       profileInfo.setUserInfo(res);
+      popupFormEdit.close();
     })
     .catch((err) => {
       console.log(err);
@@ -106,6 +109,7 @@ const popupVerification = new PopupWithVerification({
     api.deleteCard(cardId)
     .then(() => {
       card.handleElementDelete();
+      popupVerification.close();
     })
     .catch((err) => {
       console.log(err);
@@ -119,7 +123,8 @@ const popupFormAvatar = new PopupWithForm({
     popupFormAvatar.renderLoading(true);
     api.changeAvatar(formData)
     .then((res) => {
-      profileInfo.setAvatar(res);
+      profileInfo.setUserInfo(res);
+      popupFormAvatar.close();
     })
     .catch((err) => {
       console.log(err);
