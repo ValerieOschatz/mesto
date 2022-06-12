@@ -55,7 +55,7 @@ export default class Api {
     .then((res) => this._checkServerRes(res));
   }
 
-  setCardLike(cardId) {
+  addCardLike(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: {

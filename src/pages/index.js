@@ -165,15 +165,15 @@ function handleLikeClick(cardId, card) {
   if (card.checkLike()) {
     api.removeCardLike(cardId)
     .then((res) => {
-      card.countLikes(res);
+      card.setLikes(res);
     })
     .catch((err) => {
       console.log(err);
     })
   } else {
-    api.setCardLike(cardId)
+    api.addCardLike(cardId)
     .then((res) => {
-      card.countLikes(res);
+      card.setLikes(res);
     })
     .catch((err) => {
       console.log(err);

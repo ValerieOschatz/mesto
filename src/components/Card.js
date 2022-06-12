@@ -52,16 +52,17 @@ export default class Card {
     this._element = null;
   }
 
-  countLikes({ likes }) {
+  checkLike = () => this._likes.some(like => like._id === this._userId);
+
+  _countLikes(likes) {
     this._likes = likes;
     this._elementLikeCounter.textContent = likes.length;
-
-    this.checkLike() 
-    ? this._elementLikeButton.classList.add('element__like-button_active') 
-    : this._elementLikeButton.classList.remove('element__like-button_active');
   }
 
-  checkLike = () => this._likes.some(like => like._id === this._userId);
+  setLikes({ likes }) {
+    this._countLikes(likes);
+    this._elementLikeButton.classList.toggle('element__like-button_active');
+  }
 
   _setEventListeners() {
     this._elementImage.addEventListener('click', () => {
